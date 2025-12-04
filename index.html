@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Business Card</title>
+    <title>Social Links</title>
     <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap">
     <style>
         :root {
@@ -54,172 +54,40 @@
             box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
         }
 
-        .card-header {
-            background: linear-gradient(135deg, var(--primary), var(--primary-light));
-            padding: 24px;
-            text-align: center;
-            color: white;
-            position: relative;
-            overflow: hidden;
-        }
-
-        .card-header::before {
-            content: '';
-            position: absolute;
-            top: -50%;
-            left: -50%;
-            width: 200%;
-            height: 200%;
-            background: radial-gradient(circle, rgba(255,255,255,0.1) 0%, rgba(255,255,255,0) 70%);
-            transform: rotate(30deg);
-            animation: shine 6s infinite;
-        }
-
-        @keyframes shine {
-            0% { transform: rotate(30deg) translate(-20%, -20%); }
-            100% { transform: rotate(30deg) translate(20%, 20%); }
-        }
-
-        .profile-img-container {
-            width: 120px;
-            height: 120px;
-            margin: 0 auto 16px;
-            border-radius: 50%;
-            border: 4px solid rgba(255, 255, 255, 0.3);
-            overflow: hidden;
-            position: relative;
-            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
-        }
-
-        .profile-img {
-            width: 100%;
-            height: 100%;
-            object-fit: cover;
-            display: block;
-        }
-
-        .name {
-            font-size: 24px;
-            font-weight: 700;
-            margin-bottom: 4px;
-        }
-
-        .title {
-            font-size: 16px;
-            font-weight: 400;
-            opacity: 0.9;
-            margin-bottom: 8px;
-        }
-
-        .company {
-            font-size: 14px;
-            font-weight: 500;
-            display: inline-block;
-            background: rgba(255, 255, 255, 0.2);
-            padding: 4px 12px;
-            border-radius: 20px;
-            backdrop-filter: blur(5px);
-        }
-
         .card-body {
-            padding: 24px;
+            padding: 32px;
         }
 
         .section-title {
-            font-size: 14px;
+            font-size: 18px;
             font-weight: 600;
             color: var(--primary);
             text-transform: uppercase;
             letter-spacing: 0.05em;
-            margin-bottom: 16px;
-            display: flex;
-            align-items: center;
-        }
-
-        .section-title::after {
-            content: '';
-            flex: 1;
-            height: 1px;
-            background: var(--border);
-            margin-left: 12px;
-        }
-
-        .contact-list {
-            list-style: none;
             margin-bottom: 24px;
+            text-align: center;
         }
 
-        .contact-item {
-            display: flex;
-            align-items: center;
-            margin-bottom: 12px;
-            padding: 12px;
-            border-radius: 8px;
-            transition: var(--transition);
-        }
-
-        .contact-item:hover {
-            background: rgba(59, 130, 246, 0.05);
-        }
-
-        .contact-icon {
-            width: 40px;
-            height: 40px;
-            background: rgba(59, 130, 246, 0.1);
-            border-radius: 8px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            margin-right: 12px;
-            flex-shrink: 0;
-            color: var(--primary);
-        }
-
-        .contact-icon svg {
-            width: 20px;
-            height: 20px;
-        }
-
-        .contact-details {
-            flex: 1;
-        }
-
-        .contact-label {
-            font-size: 12px;
-            color: var(--text-light);
-            margin-bottom: 2px;
-        }
-
-        .contact-value {
-    font-size: 14px;
-    font-weight: 500;
-    color: var(--text);
-    white-space: pre-wrap; /* Preserves line breaks and wraps text */
-    word-break: break-word; /* Breaks long words if necessary */
-    line-height: 1.6; /* Improves readability for multiline text */
-}
-#address {
-    margin: 0; /* Remove default paragraph margins */
-    max-width: 100%; /* Ensure it respects container width */
-}
         .social-links {
-            display: flex;
-            justify-content: center;
-            gap: 12px;
-            margin-top: 24px;
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 16px;
+            margin-top: 10px;
         }
 
         .social-link {
-            width: 40px;
-            height: 40px;
-            border-radius: 50%;
+            width: 100%;
+            aspect-ratio: 1;
+            border-radius: 12px;
             display: flex;
+            flex-direction: column;
             align-items: center;
             justify-content: center;
             background: rgba(59, 130, 246, 0.1);
             color: var(--primary);
             transition: var(--transition);
             text-decoration: none;
+            padding: 16px;
         }
 
         .social-link:hover {
@@ -229,29 +97,15 @@
         }
 
         .social-link svg {
-            width: 18px;
-            height: 18px;
+            width: 28px;
+            height: 28px;
+            margin-bottom: 8px;
         }
 
-        .download-btn {
-            display: block;
-            width: 100%;
-            padding: 12px;
-            background: var(--primary);
-            color: white;
-            border: none;
-            border-radius: 8px;
+        .social-link span {
+            font-size: 12px;
             font-weight: 500;
-            cursor: pointer;
-            transition: var(--transition);
-            margin-top: 24px;
-            text-align: center;
-            text-decoration: none;
-        }
-
-        .download-btn:hover {
-            background: var(--primary-dark);
-            transform: translateY(-2px);
+            text-transform: capitalize;
         }
 
         .loading {
@@ -277,25 +131,16 @@
                 border-radius: 12px;
             }
             
-            .card-header {
-                padding: 20px;
-            }
-            
-            .profile-img-container {
-                width: 100px;
-                height: 100px;
-            }
-            
-            .name {
-                font-size: 20px;
-            }
-            
             .card-body {
-                padding: 20px;
+                padding: 24px;
+            }
+            
+            .social-links {
+                grid-template-columns: repeat(2, 1fr);
+                gap: 12px;
             }
         }
 
-        /* Animation */
         @keyframes fadeIn {
             from { opacity: 0; transform: translateY(20px); }
             to { opacity: 1; transform: translateY(0); }
@@ -304,89 +149,18 @@
         .animated {
             animation: fadeIn 0.6s ease-out forwards;
         }
-		.edit-button {
-    position: absolute;
-    top: 16px;
-    right: 16px;
-    background: rgba(255, 255, 255, 0.2);
-    color: white;
-    padding: 6px 10px;
-    border-radius: 50%;
-    text-decoration: none;
-    font-size: 16px;
-    font-weight: bold;
-    transition: background 0.3s ease;
-    z-index: 2;
-}
-
-.edit-button:hover {
-    background: rgba(255, 255, 255, 0.4);
-}
     </style>
 </head>
 <body>
     <div class="card">
-        <div id="loading" class="loading">Loading contact information</div>
+        <div id="loading" class="loading">Loading social links</div>
         
-        <div id="profile" style="display: none;">
-            <div class="card-header">
-                <div class="profile-img-container">
-                    <img id="profile-image" src="" alt="Profile Image" class="profile-img">
-                </div>
-				<a id="edit-btn" class="edit-button" href="#" title="Edit">&#9998;</a>
-                <h1 id="full-name" class="name"></h1>
-                <p id="job-title" class="title"></p>
-                <p id="company" class="company"></p>
-            </div>
-
+        <div id="social-container" style="display: none;">
             <div class="card-body">
-                <h3 class="section-title">Contact</h3>
-                <ul class="contact-list">
-                    <li class="contact-item">
-                        <div class="contact-icon">
-                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                                <path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"></path>
-                                <polyline points="22,6 12,13 2,6"></polyline>
-                            </svg>
-                        </div>
-                        <div class="contact-details">
-                            <div class="contact-label">Email</div>
-                            <div id="email" class="contact-value"></div>
-                        </div>
-                    </li>
-                    <a id="phone-item" href="#" style="text-decoration: none; color: inherit;">
-                        <li class="contact-item">
-                            <div class="contact-icon">
-                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                                    <path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"></path>
-                                </svg>
-                            </div>
-                            <div class="contact-details">
-                                <div class="contact-label">Phone</div>
-                                <div id="phone" class="contact-value"></div>
-                            </div>
-                        </li>
-                    </a>
-                    <li class="contact-item">
-                        <div class="contact-icon">
-                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                                <path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"></path>
-                                <circle cx="12" cy="10" r="3"></circle>
-                            </svg>
-                        </div>
-                        <div class="contact-details">
-    <div class="contact-label">Address</div>
-    <p id="address" class="contact-value"></p>
-</div>
-                    </li>
-                </ul>
-
                 <h3 class="section-title">Connect</h3>
                 <div id="social-links" class="social-links">
                     <!-- Social links will be inserted here by JavaScript -->
                 </div>
-
-                <a href="#" class="download-btn" onclick="downloadContact(event)">Save to Contacts</a>
             </div>
         </div>
     </div>
@@ -400,15 +174,9 @@
         document.addEventListener('DOMContentLoaded', function() {
             const urlParams = new URLSearchParams(window.location.search);
             const contactId = urlParams.get('id') || '111';
-			
-			// Set href of edit button
-			const editButton = document.getElementById('edit-btn');
-			if (editButton && contactId) {
-				editButton.href = `update.html?id=${encodeURIComponent(contactId)}`;
-			}
-			
+            
             const loadingElement = document.getElementById('loading');
-            const profileElement = document.getElementById('profile');
+            const socialContainer = document.getElementById('social-container');
 
             if (!contactId) {
                 loadingElement.textContent = 'Error: No contact ID provided. Add ?id=YOUR_ID to the URL.';
@@ -444,8 +212,8 @@
 
                         if (foundProfileData) {
                             loadingElement.style.display = 'none';
-                            profileElement.style.display = 'block';
-                            profileElement.classList.add('animated');
+                            socialContainer.style.display = 'block';
+                            socialContainer.classList.add('animated');
 
                             const profile = {};
                             headers.forEach((header, index) => {
@@ -453,7 +221,7 @@
                                 profile[normalizedHeader] = index < foundProfileData.length ? foundProfileData[index] : '';
                             });
                             
-                            populateCard(profile);
+                            populateSocialLinks(profile);
                         } else {
                             loadingElement.textContent = `Contact with ID '${contactId}' not found.`;
                         }
@@ -463,32 +231,11 @@
                 })
                 .catch(error => {
                     console.error('Error:', error);
-                    loadingElement.textContent = 'Error loading contact: ' + error.message;
+                    loadingElement.textContent = 'Error loading social links: ' + error.message;
                 });
         });
         
-        function populateCard(data) {
-            // Set profile image with fallback
-            const defaultImage = 'https://cdn.pixabay.com/photo/2015/10/05/22/37/blank-profile-picture-973460_1280.png';
-            const googleDriveImageBase = 'https://lh3.googleusercontent.com/d/';
-            const imageId = data.image_id;
-            const profileImageUrl = imageId 
-                ? `${googleDriveImageBase}${imageId}=s220?authuser=0`
-                : defaultImage;
-            
-            document.getElementById('profile-image').src = data.profileimage || profileImageUrl || defaultImage;
-            document.getElementById('full-name').textContent = data.fullname || data['full name'] || '';
-            document.getElementById('job-title').textContent = data.jobtitle || data['job title'] || '';
-            document.getElementById('company').textContent = data.company || '';
-            
-            // Contact info
-            document.getElementById('email').textContent = data.email || '';
-            const phoneValue = data.phone || '';
-            document.getElementById('phone').textContent = phoneValue;
-            document.getElementById('phone-item').href = phoneValue ? `tel:${phoneValue}` : '#';
-            document.getElementById('address').textContent = data.address || '';
-            
-            // Social links
+        function populateSocialLinks(data) {
             const socialLinksContainer = document.getElementById('social-links');
             socialLinksContainer.innerHTML = ''; 
             
@@ -497,6 +244,7 @@
                 'whatsapp': ['whatsapp', 'whatsappurl', 'whatsapp url', 'whatsapp_url'],
                 'instagram': ['instagram', 'instagramurl', 'instagram url', 'instagram_url'],
                 'facebook': ['facebook', 'facebookurl', 'facebook url', 'facebook_url'],
+				'google': ['google', 'googleurl', 'google url', 'google_url'],
                 'twitter': ['twitter', 'twitterurl', 'twitter url', 'twitter_url'],
                 'github': ['github', 'githuburl', 'github url', 'github_url']
             };
@@ -540,7 +288,11 @@
                     path.setAttribute('d', getSocialIconPath(platform));
                     svg.appendChild(path);
                     
+                    const platformName = document.createElement('span');
+                    platformName.textContent = platform;
+                    
                     link.appendChild(svg);
+                    link.appendChild(platformName);
                     socialLinksContainer.appendChild(link);
                 }
             }
@@ -552,68 +304,23 @@
                 noSocialMsg.style.fontSize = '14px';
                 noSocialMsg.style.textAlign = 'center';
                 noSocialMsg.style.width = '100%';
+                noSocialMsg.style.gridColumn = '1 / -1';
                 socialLinksContainer.appendChild(noSocialMsg);
             }
         }
         
         function getSocialIconPath(platform) {
             const icons = {
-                linkedin: 'M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z M2 9h4v12H2z M6 4a2 2 0 1 1 0 4 2 2 0 0 1 0-4z',
-                whatsapp: 'M21 11.5a8.38 8.38 0 0 1-.9 3.8 8.5 8.5 0 0 1-7.6 4.7 8.38 8.38 0 0 1-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 0 1-.9-3.8 8.5 8.5 0 0 1 4.7-7.6 8.38 8.38 0 0 1 3.8-.9h.5a8.48 8.48 0 0 1 8 8v.5z',
-                instagram: 'M12 2c2.717 0 3.056.01 4.122.06 1.065.05 1.79.217 2.428.465.66.254 1.216.598 1.772 1.153a4.908 4.908 0 0 1 1.153 1.772c.247.637.415 1.363.465 2.428.047 1.066.06 1.405.06 4.122 0 2.717-.01 3.056-.06 4.122-.05 1.065-.218 1.79-.465 2.428a4.883 4.883 0 0 1-1.153 1.772 4.915 4.915 0 0 1-1.772 1.153c-.637.247-1.363.415-2.428.465-1.066.047-1.405.06-4.122.06-2.717 0-3.056-.01-4.122-.06-1.065-.05-1.79-.218-2.428-.465a4.89 4.89 0 0 1-1.772-1.153 4.904 4.904 0 0 1-1.153-1.772c-.248-.637-.415-1.363-.465-2.428C2.013 15.056 2 14.717 2 12c0-2.717.01-3.056.06-4.122.05-1.066.217-1.79.465-2.428a4.88 4.88 0 0 1 1.153-1.772A4.897 4.897 0 0 1 5.45 2.525c.638-.248 1.362-.415 2.428-.465C8.944 2.013 9.283 2 12 2zm0 5a5 5 0 1 0 0 10 5 5 0 0 0 0-10zm6.5-.25a1.25 1.25 0 0 0-2.5 0 1.25 1.25 0 0 0 2.5 0zM12 9a3 3 0 1 1 0 6 3 3 0 0 1 0-6z',
-                facebook: 'M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z',
-                twitter: 'M23 3a10.9 10.9 0 0 1-3.14 1.53 4.48 4.48 0 0 0-7.86 3v1A10.66 10.66 0 0 1 3 4s-4 9 5 13a11.64 11.64 0 0 1-7 2c9 5 20 0 20-11.5a4.5 4.5 0 0 0-.08-.83A7.72 7.72 0 0 0 23 3z',
-                github: 'M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22'
-            };
+				linkedin: 'M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z M2 9h4v12H2z M6 4a2 2 0 1 1 0 4 2 2 0 0 1 0-4z',
+				whatsapp: 'M21 11.5a8.38 8.38 0 0 1-.9 3.8 8.5 8.5 0 0 1-7.6 4.7 8.38 8.38 0 0 1-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 0 1-.9-3.8 8.5 8.5 0 0 1 4.7-7.6 8.38 8.38 0 0 1 3.8-.9h.5a8.48 8.48 0 0 1 8 8v.5z',
+				instagram: 'M12 2c2.717 0 3.056.01 4.122.06 1.065.05 1.79.217 2.428.465.66.254 1.216.598 1.772 1.153a4.908 4.908 0 0 1 1.153 1.772c.247.637.415 1.363.465 2.428.047 1.066.06 1.405.06 4.122 0 2.717-.01 3.056-.06 4.122-.05 1.065-.218 1.79-.465 2.428a4.883 4.883 0 0 1-1.153 1.772 4.915 4.915 0 0 1-1.772 1.153c-.637.247-1.363.415-2.428.465-1.066.047-1.405.06-4.122.06-2.717 0-3.056-.01-4.122-.06-1.065-.05-1.79-.218-2.428-.465a4.89 4.89 0 0 1-1.772-1.153 4.904 4.904 0 0 1-1.153-1.772c-.248-.637-.415-1.363-.465-2.428C2.013 15.056 2 14.717 2 12c0-2.717.01-3.056.06-4.122.05-1.066.217-1.79.465-2.428a4.88 4.88 0 0 1 1.153-1.772A4.897 4.897 0 0 1 5.45 2.525c.638-.248 1.362-.415 2.428-.465C8.944 2.013 9.283 2 12 2zm0 5a5 5 0 1 0 0 10 5 5 0 0 0 0-10zm6.5-.25a1.25 1.25 0 0 0-2.5 0 1.25 1.25 0 0 0 2.5 0zM12 9a3 3 0 1 1 0 6 3 3 0 0 1 0-6z',
+				facebook: 'M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z',
+				twitter: 'M23 3a10.9 10.9 0 0 1-3.14 1.53 4.48 4.48 0 0 0-7.86 3v1A10.66 10.66 0 0 1 3 4s-4 9 5 13a11.64 11.64 0 0 1-7 2c9 5 20 0 20-11.5a4.5 4.5 0 0 0-.08-.83A7.72 7.72 0 0 0 23 3z',
+				github: 'M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22',
+				google: 'M21.35 11.1H12v2.9h5.35c-.25 1.4-1.6 4.1-5.35 4.1A6.25 6.25 0 1 1 17.3 7.7l2.1-2.1A9.5 9.5 0 1 0 21.5 16c.4-.7.7-1.6.85-2.6.05-.3.05-.6.05-.9 0-.5-.05-.9-.15-1.4z'
+			};
+
             return icons[platform] || '';
-        }
-        
-        function downloadContact(e) {
-            e.preventDefault();
-            
-            const fullName = document.getElementById('full-name').textContent;
-            const jobTitle = document.getElementById('job-title').textContent;
-            const email = document.getElementById('email').textContent;
-            const phone = document.getElementById('phone').textContent;
-            const address = document.getElementById('address').textContent;
-            const company = document.getElementById('company').textContent;
-            
-            const socialLinks = {};
-            document.querySelectorAll('#social-links a').forEach(link => {
-                const platform = link.title.toLowerCase();
-                socialLinks[platform] = link.href;
-            });
-            
-            let vCard = `BEGIN:VCARD
-VERSION:3.0
-FN:${fullName}
-N:${fullName.split(' ').reverse().join(';')};;;
-TITLE:${jobTitle}
-ORG:${company}
-EMAIL:${email}
-TEL;TYPE=CELL:${phone}
-ADR;TYPE=WORK:;;${address.replace(/\n/g, '\\n')}
-`;
-
-            // Add social links
-            if (socialLinks.linkedin) vCard += `URL;type=LinkedIn:${socialLinks.linkedin}\n`;
-            if (socialLinks.instagram) vCard += `URL;type=Instagram:${socialLinks.instagram}\n`;
-            if (socialLinks.facebook) vCard += `URL;type=Facebook:${socialLinks.facebook}\n`;
-            if (socialLinks.twitter) vCard += `URL;type=Twitter:${socialLinks.twitter}\n`;
-            if (socialLinks.github) vCard += `URL;type=GitHub:${socialLinks.github}\n`;
-            if (socialLinks.whatsapp) vCard += `URL;type=WhatsApp:${socialLinks.whatsapp}\n`;
-
-            vCard += `END:VCARD`;
-
-            const blob = new Blob([vCard], { type: 'text/vcard;charset=utf-8' });
-            const url = window.URL.createObjectURL(blob);
-            const link = document.createElement('a');
-            link.href = url;
-            link.download = `${fullName.toLowerCase().replace(/\s+/g, '_')}_contact.vcf`;
-            document.body.appendChild(link);
-            link.click();
-            document.body.removeChild(link);
-            window.URL.revokeObjectURL(url);
         }
     </script>
 </body>
