@@ -735,9 +735,21 @@ textarea::placeholder {
 
                 <div class="two-column">
                     <div class="form-group">
+                        <label for="google_url">Google Review</label>
+                        <div class="input-wrapper">
+                            <input type="url" id="google_url" name="google_url" placeholder="https://www.google.com/in/yourprofile">
+                        </div>
+                    </div>
+					<div class="form-group">
                         <label for="linkedin_url">LinkedIn Profile</label>
                         <div class="input-wrapper">
                             <input type="url" id="linkedin_url" name="linkedin_url" placeholder="https://linkedin.com/in/yourprofile">
+                        </div>
+                    </div>
+					<div class="form-group">
+                        <label for="google_url">Google Profile</label>
+                        <div class="input-wrapper">
+                            <input type="url" id="google_url" name="google_url" placeholder="https://google.com/in/yourprofile">
                         </div>
                     </div>
                     <div class="form-group">
@@ -795,7 +807,7 @@ textarea::placeholder {
         const API_KEY = 'AIzaSyByyiuwuJBysKl2xtvl6wCw6Gz9shyDzXs';
         const SHEET_NAME = 'BusinessCard';
         // Replace with your Apps Script web app URL
-        const APPS_SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbwFgCqBbpbqwjbSu1LuAfSFAaezatpi15qjHe4XenPCocXISOtcWo6HdRLQ12L7PnY/exec';
+        const APPS_SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbzrvpV46HAyYdnQ2SJUonrBZnEfKEiNxIBA7iORbOsvW79zzG1EXAvZt__5INrxqIM/exec';
 
         // Get ID from URL parameter
         function getIdFromUrl() {
@@ -873,6 +885,7 @@ textarea::placeholder {
                         document.getElementById('phone').value = profile.phone || '';
                         document.getElementById('address').value = profile.address || '';
                         document.getElementById('linkedin_url').value = profile.linkedin_url || profile.linkedinurl || '';
+						document.getElementById('google_url').value = profile.google_url || profile.googleurl || '';
                         document.getElementById('whatsapp_url').value = profile.whatsapp_url || profile.whatsappurl || '';
                         document.getElementById('instagram_url').value = profile.instagram_url || profile.instagramurl || '';
                         document.getElementById('facebook_url').value = profile.facebook_url || profile.facebookurl || '';
@@ -916,6 +929,7 @@ textarea::placeholder {
                 phone: document.getElementById('phone').value,
                 address: document.getElementById('address').value,
                 linkedin_url: document.getElementById('linkedin_url').value,
+				google_url: document.getElementById('google_url').value,
                 whatsapp_url: document.getElementById('whatsapp_url').value,
                 instagram_url: document.getElementById('instagram_url').value,
                 facebook_url: document.getElementById('facebook_url').value,
