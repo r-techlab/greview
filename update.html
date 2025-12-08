@@ -91,7 +91,7 @@
         }
 
         .container {
-            max-width: 600px;
+            max-width: 500px;
             margin: 0 auto;
             background: rgba(255, 255, 255, 0.95);
             backdrop-filter: blur(20px);
@@ -158,6 +158,22 @@
             font-weight: 400;
         }
 
+        .card-id {
+            margin-top: 0.5rem;
+            font-size: 0.9rem;
+            color: var(--gray-600);
+            background: rgba(255, 255, 255, 0.7);
+            padding: 0.25rem 0.75rem;
+            border-radius: 12px;
+            display: inline-block;
+            font-weight: 500;
+        }
+
+        .card-id span {
+            font-weight: 600;
+            color: var(--primary);
+        }
+
         .status-message {
             padding: 1rem 1.5rem;
             border-radius: 16px;
@@ -194,30 +210,11 @@
 
         .form-group {
             position: relative;
+            transition: transform 0.2s ease;
         }
 
-        .form-group.half {
-            grid-column: span 1;
-        }
-.card-id {
-    margin-top: 0.5rem;
-    font-size: 0.9rem;
-    color: var(--gray-600);
-    background: rgba(255, 255, 255, 0.7);
-    padding: 0.25rem 0.75rem;
-    border-radius: 12px;
-    display: inline-block;
-    font-weight: 500;
-}
-
-.card-id span {
-    font-weight: 600;
-    color: var(--primary);
-}
-        .two-column {
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 1.5rem;
+        .form-group:hover {
+            transform: translateX(4px);
         }
 
         label {
@@ -234,9 +231,6 @@
             position: relative;
         }
 
-        input[type="text"],
-        input[type="email"],
-        input[type="tel"],
         input[type="url"],
         input[type="password"] {
             width: 100%;
@@ -263,194 +257,9 @@
             border-color: var(--success);
         }
 
-        /* File Upload Styling */
-        .file-upload-section {
-            margin-top: 1rem;
-            padding: 2rem;
-            border: 2px dashed var(--gray-300);
-            border-radius: 20px;
-            background: linear-gradient(135deg, var(--gray-50), var(--white));
-            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
-            position: relative;
-            overflow: hidden;
-        }
-
-        .file-upload-section::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: -100%;
-            width: 100%;
-            height: 100%;
-            background: linear-gradient(90deg, transparent, rgba(99, 102, 241, 0.1), transparent);
-            transition: left 0.6s ease;
-        }
-
-        .file-upload-section:hover {
-            border-color: var(--primary);
-            background: linear-gradient(135deg, rgba(99, 102, 241, 0.05), var(--white));
-            transform: translateY(-4px);
-            box-shadow: 0 12px 32px rgba(99, 102, 241, 0.15);
-        }
-
-        .file-upload-section:hover::before {
-            left: 100%;
-        }
-
-        .file-upload-section.dragover {
-            border-color: var(--secondary);
-            background: linear-gradient(135deg, rgba(236, 72, 153, 0.1), var(--white));
-            transform: scale(1.02);
-        }
-
-        .file-upload-wrapper {
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            text-align: center;
-            gap: 1.5rem;
-            position: relative;
-            z-index: 2;
-        }
-
-        .file-upload-icon {
-            width: 4rem;
-            height: 4rem;
-            background: linear-gradient(135deg, var(--primary), var(--secondary));
-            border-radius: 50%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 1.5rem;
-            color: white;
-            animation: pulse 2s ease-in-out infinite;
-        }
-
-        @keyframes pulse {
-            0%, 100% { transform: scale(1); }
-            50% { transform: scale(1.05); }
-        }
-
-        .file-upload-text {
-            display: flex;
-            flex-direction: column;
-            gap: 0.5rem;
-        }
-
-        .file-upload-title {
-            font-size: 1.25rem;
-            font-weight: 600;
-            color: var(--gray-800);
-        }
-
-        .file-upload-subtitle {
-            font-size: 0.875rem;
-            color: var(--gray-500);
-        }
-
-        .file-input {
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            opacity: 0;
-            cursor: pointer;
-        }
-
-        .file-upload-button {
-            padding: 0.875rem 2rem;
-            background: linear-gradient(135deg, var(--primary), var(--primary-dark));
-            color: white;
-            border: none;
-            border-radius: 12px;
-            font-size: 0.875rem;
-            font-weight: 600;
-            cursor: pointer;
-            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-            position: relative;
-            z-index: 3;
-            box-shadow: 0 4px 12px rgba(99, 102, 241, 0.3);
-        }
-
-        .file-upload-button:hover {
-            transform: translateY(-2px);
-            box-shadow: 0 8px 20px rgba(99, 102, 241, 0.4);
-        }
-
-        .file-selected {
-            margin-top: 1.5rem;
-            padding: 1.5rem;
-            background: linear-gradient(135deg, rgba(16, 185, 129, 0.1), rgba(16, 185, 129, 0.05));
-            border: 2px solid rgba(16, 185, 129, 0.2);
-            border-radius: 16px;
-            display: none;
-            backdrop-filter: blur(10px);
-        }
-
-        .file-selected.show {
-            display: block;
-            animation: slideIn 0.4s ease-out;
-        }
-
-        @keyframes slideIn {
-            from { opacity: 0; transform: translateY(20px); }
-            to { opacity: 1; transform: translateY(0); }
-        }
-
-        .file-info {
-            display: flex;
-            align-items: center;
-            gap: 1rem;
-        }
-
-        .file-icon {
-            width: 3rem;
-            height: 3rem;
-            background: linear-gradient(135deg, var(--success), #059669);
-            border-radius: 12px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            color: white;
-            font-size: 1.25rem;
-            font-weight: 600;
-        }
-
-        .file-details {
-            flex: 1;
-        }
-
-        .file-name {
-            font-weight: 600;
-            color: var(--gray-800);
-            margin-bottom: 0.25rem;
-        }
-
-        .file-size {
-            font-size: 0.875rem;
-            color: var(--gray-600);
-        }
-
-        .file-remove {
-            background: rgba(239, 68, 68, 0.1);
-            border: none;
-            color: var(--error);
-            cursor: pointer;
-            font-size: 1.5rem;
-            padding: 0.5rem;
-            border-radius: 8px;
-            transition: all 0.3s ease;
-            width: 2.5rem;
-            height: 2.5rem;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-        }
-
-        .file-remove:hover {
-            background: rgba(239, 68, 68, 0.2);
-            transform: scale(1.1);
+        input:focus-visible {
+            outline: 2px solid var(--primary);
+            outline-offset: 2px;
         }
 
         .button-group {
@@ -509,7 +318,6 @@
             box-shadow: 0 12px 32px rgba(71, 85, 105, 0.4);
         }
 
-        /* Disabled button styles */
         .btn-primary:disabled {
             background: linear-gradient(135deg, var(--gray-400), var(--gray-500));
             cursor: not-allowed;
@@ -522,55 +330,6 @@
             display: none;
         }
 
-        /* Responsive Design */
-        @media (max-width: 768px) {
-            body {
-                padding: 1rem;
-            }
-
-            .container {
-                padding: 2rem;
-                border-radius: 20px;
-            }
-
-            h1 {
-                font-size: 2rem;
-            }
-
-            .two-column {
-                grid-template-columns: 1fr;
-            }
-
-            .button-group {
-                flex-direction: column;
-            }
-
-            .file-upload-section {
-                padding: 1.5rem;
-            }
-        }
-
-        @media (max-width: 480px) {
-            .container {
-                padding: 1.5rem;
-                border-radius: 16px;
-            }
-
-            h1 {
-                font-size: 1.75rem;
-            }
-
-            input[type="text"],
-            input[type="email"],
-            input[type="tel"],
-            input[type="url"],
-            input[type="password"] {
-                padding: 0.875rem 1.25rem;
-                font-size: 0.875rem;
-            }
-        }
-
-        /* Loading Animation */
         .loading-spinner {
             display: inline-block;
             width: 20px;
@@ -586,52 +345,41 @@
             to { transform: rotate(360deg); }
         }
 
-        /* Micro-interactions */
-        .form-group {
-            transition: transform 0.2s ease;
+        @media (max-width: 768px) {
+            body {
+                padding: 1rem;
+            }
+
+            .container {
+                padding: 2rem;
+                border-radius: 20px;
+            }
+
+            h1 {
+                font-size: 2rem;
+            }
+
+            .button-group {
+                flex-direction: column;
+            }
         }
 
-        .form-group:hover {
-            transform: translateX(4px);
+        @media (max-width: 480px) {
+            .container {
+                padding: 1.5rem;
+                border-radius: 16px;
+            }
+
+            h1 {
+                font-size: 1.75rem;
+            }
+
+            input[type="url"],
+            input[type="password"] {
+                padding: 0.875rem 1.25rem;
+                font-size: 0.875rem;
+            }
         }
-
-        /* Focus ring improvements */
-        input:focus-visible {
-            outline: 2px solid var(--primary);
-            outline-offset: 2px;
-        }
-textarea {
-    width: 100%;
-    padding: 1rem 1.5rem;
-    border: 2px solid var(--gray-200);
-    border-radius: 16px;
-    font-size: 1rem;
-    font-weight: 400;
-    font-family: 'Inter', sans-serif;
-    color: var(--gray-800);
-    background: var(--white);
-    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-    outline: none;
-    resize: vertical;
-    min-height: 120px;
-    line-height: 1.5;
-}
-
-textarea:focus {
-    border-color: var(--primary);
-    box-shadow: 
-        0 0 0 4px rgba(99, 102, 241, 0.1),
-        0 8px 24px rgba(99, 102, 241, 0.15);
-    transform: translateY(-2px);
-}
-
-textarea:not(:placeholder-shown) {
-    border-color: var(--success);
-}
-
-textarea::placeholder {
-    color: var(--gray-400);
-}
     </style>
 </head>
 <body>
@@ -645,8 +393,8 @@ textarea::placeholder {
     <div class="container">
         <div class="header">
             <h1>Edit Business Card</h1>
-            <p class="subtitle">Update your professional information</p>
-			<p class="card-id">Card ID: <span id="displayId"></span></p>
+            <p class="subtitle">Update your information</p>
+            <p class="card-id">Card ID: <span id="displayId"></span></p>
         </div>
 
         <div id="status" class="status-message loading">
@@ -660,125 +408,9 @@ textarea::placeholder {
 
             <div class="form-grid">
                 <div class="form-group">
-                    <label for="fullName">Full Name</label>
+                    <label for="google_url">Google Review</label>
                     <div class="input-wrapper">
-                        <input type="text" id="fullName" name="fullName" placeholder="Enter your full name" required>
-                    </div>
-                </div>
-
-                <div class="form-group">
-                    <label for="profileImage">Profile Image</label>
-                    <div class="file-upload-section" id="fileUploadSection">
-                        <div class="file-upload-wrapper">
-                            <div class="file-upload-icon">📸</div>
-                            <div class="file-upload-text">
-                                <div class="file-upload-title">Upload Profile Image</div>
-                                <div class="file-upload-subtitle">Drag and drop or click to browse</div>
-                            </div>
-                            <button type="button" class="file-upload-button" onclick="document.getElementById('fileInput').click()">
-                                Choose Image
-                            </button>
-                            <input type="file" id="fileInput" class="file-input" accept="image/*" onchange="LoadFile(event)" />
-                        </div>
-                    </div>
-                    <div class="file-selected" id="fileSelected">
-                        <div class="file-info">
-                            <div class="file-icon" id="fileIcon">📄</div>
-                            <div class="file-details">
-                                <div class="file-name" id="fileName"></div>
-                                <div class="file-size" id="fileSize"></div>
-                            </div>
-                            <button type="button" class="file-remove" onclick="removeFile()" title="Remove file">×</button>
-                        </div>
-                    </div>
-                    <input type="hidden" id="profileImage" name="profileImage" />
-                    <input type="hidden" id="fileData" name="fileData" />
-                    <input type="hidden" id="mimeType" name="mimeType" />
-                    <input type="hidden" id="fileNameHidden" name="fileName" />
-                </div>
-
-                <div class="form-group">
-                    <label for="jobTitle">Job Title</label>
-                    <div class="input-wrapper">
-                        <input type="text" id="jobTitle" name="jobTitle" placeholder="Your professional title">
-                    </div>
-                </div>
-                
-                <div class="form-group">
-                    <label for="company">Company</label>
-                    <div class="input-wrapper">
-                        <input type="text" id="company" name="company" placeholder="Your professional title">
-                    </div>
-                </div>
-
-                <div class="two-column">
-                    <div class="form-group">
-                        <label for="email">Email Address</label>
-                        <div class="input-wrapper">
-                            <input type="email" id="email" name="email" placeholder="your@email.com">
-                        </div>
-                    </div>
-                    <div class="form-group">
-                        <label for="phone">Phone Number</label>
-                        <div class="input-wrapper">
-                            <input type="tel" id="phone" name="phone" placeholder="05XXXXXXXX">
-                        </div>
-                    </div>
-                </div>
-
-                <div class="form-group">
-                    <label for="address">Address</label>
-                    <div class="input-wrapper">
-                        <textarea id="address" name="address" placeholder="Your business address" rows="4"></textarea>
-                    </div>
-                </div>
-
-                <div class="two-column">
-                    <div class="form-group">
-                        <label for="google_url">Google Review</label>
-                        <div class="input-wrapper">
-                            <input type="url" id="google_url" name="google_url" placeholder="https://www.google.com/in/yourprofile">
-                        </div>
-                    </div>
-					<div class="form-group">
-                        <label for="linkedin_url">LinkedIn Profile</label>
-                        <div class="input-wrapper">
-                            <input type="url" id="linkedin_url" name="linkedin_url" placeholder="https://linkedin.com/in/yourprofile">
-                        </div>
-                    </div>
-					<div class="form-group">
-                        <label for="google_url">Google Profile</label>
-                        <div class="input-wrapper">
-                            <input type="url" id="google_url" name="google_url" placeholder="https://google.com/in/yourprofile">
-                        </div>
-                    </div>
-                    <div class="form-group">
-                        <label for="whatsapp_url">WhatsApp</label>
-                        <div class="input-wrapper">
-                            <input type="url" id="whatsapp_url" name="whatsapp_url" placeholder="https://wa.me/yourNumber">
-                        </div>
-                    </div>
-                </div>
-
-                <div class="two-column">
-                    <div class="form-group">
-                        <label for="instagram_url">Instagram</label>
-                        <div class="input-wrapper">
-                            <input type="url" id="instagram_url" name="instagram_url" placeholder="https://instagram.com/yourhandle">
-                        </div>
-                    </div>
-                    <div class="form-group">
-                        <label for="facebook_url">Facebook</label>
-                        <div class="input-wrapper">
-                            <input type="url" id="facebook_url" name="facebook_url" placeholder="https://facebook.com/yourprofile">
-                        </div>
-                    </div>
-                </div>
-
-                <div class="form-group">
-                    <label for="twitter_url">Twitter / X</label>
-                    <div class="input-wrapper">
-                        <input type="url" id="twitter_url" name="twitter_url" placeholder="https://twitter.com/yourhandle">
+                        <input type="url" id="google_url" name="google_url" placeholder="https://www.google.com/review/yourprofile">
                     </div>
                 </div>
 
@@ -802,34 +434,26 @@ textarea::placeholder {
     </div>
 
     <script>
-        // Google Sheets ID and API key
         const SHEET_ID = '1IpgOJOIXEOlWaKhPXFAV4kWGJVw8WlfIaJHWicFSK-c';
         const API_KEY = 'AIzaSyByyiuwuJBysKl2xtvl6wCw6Gz9shyDzXs';
         const SHEET_NAME = 'BusinessCard';
-        // Replace with your Apps Script web app URL 
-		const APPS_SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbzG2g_H5hStWQGnW3pd4SuSiFdBDZHAVV3LCxJmsjDImZkNmc3L-DGUt9d7ZUB48Ks/exec';
+        const APPS_SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbzG2g_H5hStWQGnW3pd4SuSiFdBDZHAVV3LCxJmsjDImZkNmc3L-DGUt9d7ZUB48Ks/exec';
 
-        // Get ID from URL parameter
         function getIdFromUrl() {
             const urlParams = new URLSearchParams(window.location.search);
             const id = urlParams.get('id');
-            return id || '111'; // Default to 111 if no ID is found
+            return id || '111';
         }
 
-        // Load data from Google Sheet
         document.addEventListener('DOMContentLoaded', function() {
             const recordId = getIdFromUrl();
             document.getElementById('recordId').value = recordId;
-            
-			// Add this line to display the ID:
-			document.getElementById('displayId').textContent = recordId;
-	
-            // Set up change password button
+            document.getElementById('displayId').textContent = recordId;
+    
             document.getElementById('changePasswordBtn').addEventListener('click', function() {
                 window.location.href = `change-password.html?id=${recordId}`;
             });
             
-            // Log what record ID we're loading
             console.log('Loading business card with ID:', recordId);
             
             fetch(`https://sheets.googleapis.com/v4/spreadsheets/${SHEET_ID}/values/${SHEET_NAME}?key=${API_KEY}`)
@@ -839,7 +463,6 @@ textarea::placeholder {
                     if (rows && rows.length > 0) {
                         const headers = rows[0];
                         
-                        // Find the ID column index
                         let idColumnIndex = -1;
                         headers.forEach((header, index) => {
                             if (header.toLowerCase().trim() === 'id') {
@@ -850,7 +473,6 @@ textarea::placeholder {
                         
                         let profileData = null;
                         
-                        // If ID column found, search for matching row
                         if (idColumnIndex !== -1) {
                             for (let i = 1; i < rows.length; i++) {
                                 if (rows[i][idColumnIndex] === recordId) {
@@ -861,7 +483,6 @@ textarea::placeholder {
                             }
                         }
                         
-                        // If no matching row found, show error
                         if (!profileData) {
                             document.getElementById('status').className = 'status-message error';
                             document.getElementById('status').innerHTML = `Record with ID "${recordId}" not found.`;
@@ -869,30 +490,15 @@ textarea::placeholder {
                             return;
                         }
 
-                        // Create a key-value object from headers and data
                         const profile = {};
                         headers.forEach((header, index) => {
                             const normalizedHeader = header.toLowerCase().trim();
                             profile[normalizedHeader] = index < profileData.length ? profileData[index] : '';
                         });
 
-                        // Populate form
-                        document.getElementById('fullName').value = profile.fullname || profile.full_name || '';
-                        document.getElementById('profileImage').value = profile.profileimage || profile.profile_image || '';
-                        document.getElementById('jobTitle').value = profile.jobtitle || profile.job_title || '';
-                        document.getElementById('company').value = profile.company  || '';
-                        document.getElementById('email').value = profile.email || '';
-                        document.getElementById('phone').value = profile.phone || '';
-                        document.getElementById('address').value = profile.address || '';
-                        document.getElementById('linkedin_url').value = profile.linkedin_url || profile.linkedinurl || '';
-						document.getElementById('google_url').value = profile.google_url || profile.googleurl || '';
-                        document.getElementById('whatsapp_url').value = profile.whatsapp_url || profile.whatsappurl || '';
-                        document.getElementById('instagram_url').value = profile.instagram_url || profile.instagramurl || '';
-                        document.getElementById('facebook_url').value = profile.facebook_url || profile.facebookurl || '';
-                        document.getElementById('twitter_url').value = profile.twitter_url || profile.twitterurl || '';
-                        document.getElementById('current_password').value = profile.password || profile.password || '';
+                        document.getElementById('google_url').value = profile.google_url || profile.googleurl || '';
+                        document.getElementById('current_password').value = profile.password || '';
 
-                        // Show form and hide loading
                         document.getElementById('status').style.display = 'none';
                         document.getElementById('edit-form').style.display = 'block';
                     }
@@ -904,13 +510,11 @@ textarea::placeholder {
                 });
         });
 
-        // Handle form submission
         document.getElementById('edit-form').addEventListener('submit', function(e) {
             e.preventDefault();
             const statusDiv = document.getElementById('status');
             const saveButton = document.getElementById('saveButton');
             
-            // Disable save button and show loading
             saveButton.disabled = true;
             saveButton.innerHTML = '<span class="loading-spinner"></span> Saving...';
             
@@ -918,40 +522,18 @@ textarea::placeholder {
             statusDiv.innerHTML = '<span class="loading-spinner"></span>Saving your changes...';
             statusDiv.style.display = 'block';
 
-            // Get form data
             const formData = {
                 recordId: document.getElementById('recordId').value,
-                fullName: document.getElementById('fullName').value,
-                profileImage: document.getElementById('profileImage').value,
-                jobTitle: document.getElementById('jobTitle').value,
-                company: document.getElementById('company').value,
-                email: document.getElementById('email').value,
-                phone: document.getElementById('phone').value,
-                address: document.getElementById('address').value,
-                linkedin_url: document.getElementById('linkedin_url').value,
-				google_url: document.getElementById('google_url').value,
-                whatsapp_url: document.getElementById('whatsapp_url').value,
-                instagram_url: document.getElementById('instagram_url').value,
-                facebook_url: document.getElementById('facebook_url').value,
-                twitter_url: document.getElementById('twitter_url').value,
+                google_url: document.getElementById('google_url').value,
                 entered_password: document.getElementById('entered_password').value,
                 current_password: document.getElementById('current_password').value,
-                
-                fileData: document.getElementById('fileData').value,
-                mimeType: document.getElementById('mimeType').value,
-                fileName: document.getElementById('fileNameHidden').value, 
-                
                 action: 'update'
             };
 
-            // Log the ID we're updating
             console.log('Updating business card with ID:', formData.recordId);
-
-            // Log request details
             console.log('Sending JSON request to:', APPS_SCRIPT_URL);
             console.log('JSON payload:', JSON.stringify(formData));
 
-            // Try JSON request first
             fetch(APPS_SCRIPT_URL, {
                 method: 'POST',
                 body: JSON.stringify(formData),
@@ -985,7 +567,6 @@ textarea::placeholder {
                 console.error('JSON request failed:', error);
                 statusDiv.innerHTML = '<span class="loading-spinner"></span>Retrying with alternative method...';
                 
-                // Fallback to FormData request
                 const formDataObj = new FormData();
                 for (const [key, value] of Object.entries(formData)) {
                     formDataObj.append(key, value);
@@ -1025,133 +606,12 @@ textarea::placeholder {
                 statusDiv.textContent = '❌ Error saving changes: ' + error.message;
             })
             .finally(() => {
-                // Re-enable save button regardless of success/failure
                 saveButton.disabled = false;
                 saveButton.textContent = 'Save Changes';
             });
         });
 
-        function LoadFile(event) {
-            var file = event.target.files[0];
-            if (!file) return;
-            
-            var reader = new FileReader();
-            reader.onload = function(e) {
-                console.log(e.target.result);
-                var fileData = e.target.result.substr(e.target.result.indexOf(",")+1);
-                var mimeTypeStart = e.target.result.indexOf("data:") + 5;
-                var mimeTypeEnd = e.target.result.indexOf(";");
-                var mimeType = e.target.result.substr(mimeTypeStart, mimeTypeEnd - mimeTypeStart);
-                var fileName = file.name;
-                
-                document.getElementById("fileData").value = fileData;
-                document.getElementById("mimeType").value = mimeType;
-                document.getElementById("fileNameHidden").value = fileName;
-                
-                // Show file selected UI
-                showFileSelected(fileName, file.size, mimeType);
-            };    
-            reader.readAsDataURL(file);
-        }
-
-        function showFileSelected(fileName, fileSize, mimeType) {
-            const fileSelectedDiv = document.getElementById('fileSelected');
-            const fileNameSpan = document.getElementById('fileName');
-            const fileSizeSpan = document.getElementById('fileSize');
-            const fileIcon = document.getElementById('fileIcon');
-            
-            fileNameSpan.textContent = fileName;
-            fileSizeSpan.textContent = formatFileSize(fileSize);
-            
-            // Set appropriate icon based on file type
-            if (mimeType.startsWith('image/')) {
-                fileIcon.textContent = '🖼️';
-            } else if (mimeType.includes('pdf')) {
-                fileIcon.textContent = '📄';
-            } else if (mimeType.includes('word') || mimeType.includes('document')) {
-                fileIcon.textContent = '📝';
-            } else if (mimeType.includes('excel') || mimeType.includes('spreadsheet')) {
-                fileIcon.textContent = '📊';
-            } else {
-                fileIcon.textContent = '📎';
-            }
-            
-            fileSelectedDiv.classList.add('show');
-            
-            // Hide the upload section
-            document.getElementById('fileUploadSection').style.display = 'none';
-        }
-
-        function removeFile() {
-            // Clear hidden inputs
-            document.getElementById('fileData').value = '';
-            document.getElementById('mimeType').value = '';
-            document.getElementById('fileNameHidden').value = '';
-            
-            // Clear file input
-            document.getElementById('fileInput').value = '';
-            
-            // Hide file selected UI
-            document.getElementById('fileSelected').classList.remove('show');
-            
-            // Show upload section again
-            document.getElementById('fileUploadSection').style.display = 'block';
-        }
-
-        function formatFileSize(bytes) {
-            if (bytes === 0) return '0 Bytes';
-            const k = 1024;
-            const sizes = ['Bytes', 'KB', 'MB', 'GB'];
-            const i = Math.floor(Math.log(bytes) / Math.log(k));
-            return parseFloat((bytes / Math.pow(k, i)).toFixed(2)) + ' ' + sizes[i];
-        }
-
-        // Add drag and drop functionality
-        const fileUploadSection = document.getElementById('fileUploadSection');
-        
-        ['dragenter', 'dragover', 'dragleave', 'drop'].forEach(eventName => {
-            fileUploadSection.addEventListener(eventName, preventDefaults, false);
-            document.body.addEventListener(eventName, preventDefaults, false);
-        });
-
-        ['dragenter', 'dragover'].forEach(eventName => {
-            fileUploadSection.addEventListener(eventName, highlight, false);
-        });
-
-        ['dragleave', 'drop'].forEach(eventName => {
-            fileUploadSection.addEventListener(eventName, unhighlight, false);
-        });
-
-        fileUploadSection.addEventListener('drop', handleDrop, false);
-
-        function preventDefaults(e) {
-            e.preventDefault();
-            e.stopPropagation();
-        }
-
-        function highlight(e) {
-            fileUploadSection.classList.add('dragover');
-        }
-
-        function unhighlight(e) {
-            fileUploadSection.classList.remove('dragover');
-        }
-
-        function handleDrop(e) {
-            const dt = e.dataTransfer;
-            const files = dt.files;
-            
-            if (files.length > 0) {
-                const file = files[0];
-                if (file.type.startsWith('image/')) {
-                    document.getElementById('fileInput').files = files;
-                    LoadFile({ target: { files: [file] } });
-                }
-            }
-        }
-
-        // Add smooth form validation feedback
-        const inputs = document.querySelectorAll('input[type="text"], input[type="email"], input[type="tel"], input[type="url"], input[type="password"]');
+        const inputs = document.querySelectorAll('input[type="url"], input[type="password"]');
         
         inputs.forEach(input => {
             input.addEventListener('blur', function() {
