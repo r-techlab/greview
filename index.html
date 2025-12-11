@@ -47,6 +47,37 @@
             max-width: 420px;
         }
 
+.edit-button {
+    position: absolute;
+    top: 20px;
+    right: 20px;
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    color: white;
+    border: none;
+    border-radius: 50px;
+    padding: 10px 20px;
+    font-size: 14px;
+    font-weight: 600;
+    cursor: pointer;
+    box-shadow: 0 4px 12px rgba(102, 126, 234, 0.4);
+    transition: all 0.3s ease;
+    text-decoration: none;
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    z-index: 10;
+}
+
+.edit-button:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 8px 20px rgba(102, 126, 234, 0.6);
+}
+
+.edit-button svg {
+    width: 16px;
+    height: 16px;
+}
+
         .card {
             background: rgba(255, 255, 255, 0.95);
             backdrop-filter: blur(20px);
@@ -281,6 +312,13 @@
 <body>
     <div class="container">
         <div class="card">
+			<a href="#" class="edit-button" id="editCardBtn">
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+        <path d="M11 4H4a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7"/>
+        <path d="M18.5 2.5a2.121 2.121 0 0 1 3 3L12 15l-4 1 1-4 9.5-9.5z"/>
+    </svg>
+     
+</a>
             <div id="loading" class="loading">
                 <div class="loader"></div>
                 <div class="loading-text">Loading social links</div>
@@ -370,6 +408,8 @@
                     console.error('Error:', error);
                     loadingElement.innerHTML = `<p class="error-text">Error loading social links: ${error.message}</p>`;
                 });
+				
+				addEditButton();
         });
         
         function populateSocialLinks(data) {
@@ -448,6 +488,26 @@
                 socialLinksContainer.appendChild(noSocialMsg);
             }
         }
+		// Function to add edit button with dynamic ID
+function addEditButton() {
+    const urlParams = new URLSearchParams(window.location.search);
+    const contactId = urlParams.get('id') || '111';
+    
+    const cardElement = document.querySelector('.card');
+    const editButton = document.createElement('a');
+    
+    editButton.href = `update.html?id=${contactId}`;
+    editButton.className = 'edit-button';
+    editButton.innerHTML = `
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <path d="M11 4H4a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7"/>
+            <path d="M18.5 2.5a2.121 2.121 0 0 1 3 3L12 15l-4 1 1-4 9.5-9.5z"/>
+        </svg>
+         
+    `;
+    
+    cardElement.appendChild(editButton);
+}
         
         function getSocialIconPath(platform) {
             const icons = {
