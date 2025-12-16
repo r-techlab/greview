@@ -413,7 +413,30 @@
                         <input type="url" id="google_url" name="google_url" placeholder="https://www.google.com/review/yourprofile">
                     </div>
                 </div>
-
+                    <div class="form-group">
+                        <label for="whatsapp_url">WhatsApp</label>
+                        <div class="input-wrapper">
+                            <input type="url" id="whatsapp_url" name="whatsapp_url" placeholder="https://wa.me/yourNumber">
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="instagram_url">Instagram</label>
+                        <div class="input-wrapper">
+                            <input type="url" id="instagram_url" name="instagram_url" placeholder="https://instagram.com/yourhandle">
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="facebook_url">Facebook</label>
+                        <div class="input-wrapper">
+                            <input type="url" id="facebook_url" name="facebook_url" placeholder="https://facebook.com/yourprofile">
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="youtube_url">Youtube</label>
+                        <div class="input-wrapper">
+                            <input type="url" id="youtube_url" name="youtube_url" placeholder="https://youtube.com/yourprofile">
+                        </div>
+                    </div>
                 <div class="form-group">
                     <label for="entered_password">Current Password</label>
                     <div class="input-wrapper">
@@ -442,7 +465,7 @@
         function getIdFromUrl() {
             const urlParams = new URLSearchParams(window.location.search);
             const id = urlParams.get('id');
-            return id || '111';
+            return id || '10001';
         }
 
         document.addEventListener('DOMContentLoaded', function() {
@@ -497,6 +520,11 @@
                         });
 
                         document.getElementById('google_url').value = profile.google_url || profile.googleurl || '';
+						document.getElementById('whatsapp_url').value = profile.whatsapp_url || profile.whatsappurl || '';
+                        document.getElementById('instagram_url').value = profile.instagram_url || profile.instagramurl || '';
+						document.getElementById('facebook_url').value = profile.facebook_url || profile.facebookurl || '';
+						document.getElementById('youtube_url').value = profile.youtube_url || profile.youtubeurl || '';
+						
                         document.getElementById('current_password').value = profile.password || '';
 
                         document.getElementById('status').style.display = 'none';
@@ -524,7 +552,13 @@
 
             const formData = {
                 recordId: document.getElementById('recordId').value,
+				
                 google_url: document.getElementById('google_url').value,
+				whatsapp_url: document.getElementById('whatsapp_url').value,
+                instagram_url: document.getElementById('instagram_url').value,
+                facebook_url: document.getElementById('facebook_url').value,
+				youtube_url: document.getElementById('youtube_url').value,
+				
                 entered_password: document.getElementById('entered_password').value,
                 current_password: document.getElementById('current_password').value,
                 action: 'update'
