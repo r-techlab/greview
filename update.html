@@ -431,6 +431,12 @@
                             <input type="url" id="facebook_url" name="facebook_url" placeholder="https://facebook.com/yourprofile">
                         </div>
                     </div>
+					<div class="form-group">
+                        <label for="website_url">Website</label>
+                        <div class="input-wrapper">
+                            <input type="url" id="website_url" name="website_url" placeholder="https://wwww.yoursite.com">
+                        </div>
+                    </div>
                     <div class="form-group">
                         <label for="youtube_url">Youtube</label>
                         <div class="input-wrapper">
@@ -460,7 +466,7 @@
         const SHEET_ID = '1wAPgSKnAFwBDYe8eRHL_pgluEcIk1mJXc79l_Istt6Y';
         const API_KEY = 'AIzaSyByyiuwuJBysKl2xtvl6wCw6Gz9shyDzXs';
         const SHEET_NAME = 'SocialMediaCard';
-        const APPS_SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbziNzcyhxHxCVzGfIAJeYjLjbcqVJI0SnGmSdc02NvhG0EfYcfYtHExeILJkMHE3i6A/exec';
+        const APPS_SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbxixKSrlt7_Qp5zMGpGrLFr5dct8ah6RPF4WHgX9s4o3hwaziEi9rgTpAgHR2w18YxF/exec';
 
         function getIdFromUrl() {
             const urlParams = new URLSearchParams(window.location.search);
@@ -523,6 +529,7 @@
 						document.getElementById('whatsapp_url').value = profile.whatsapp_url || profile.whatsappurl || '';
                         document.getElementById('instagram_url').value = profile.instagram_url || profile.instagramurl || '';
 						document.getElementById('facebook_url').value = profile.facebook_url || profile.facebookurl || '';
+						document.getElementById('website_url').value = profile.website_url  || '';
 						document.getElementById('youtube_url').value = profile.youtube_url || profile.youtubeurl || '';
 						
                         document.getElementById('current_password').value = profile.password || '';
@@ -557,6 +564,7 @@
 				whatsapp_url: document.getElementById('whatsapp_url').value,
                 instagram_url: document.getElementById('instagram_url').value,
                 facebook_url: document.getElementById('facebook_url').value,
+				website_url: document.getElementById('website_url').value,
 				youtube_url: document.getElementById('youtube_url').value,
 				
                 entered_password: document.getElementById('entered_password').value,
