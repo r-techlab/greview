@@ -441,7 +441,7 @@
                         cleanUrl = cleanUrl.replace(/[\/\?#].*$/, ''); // Remove any paths, queries, or fragments
                         cleanUrl = cleanUrl.replace(/^@/, ''); // Remove @ if present
                         
-                        // Store as web URL initially
+                        // For Instagram, we'll use a special approach
                         socialUrl = `https://instagram.com/${cleanUrl}`;
                     } else if (!socialUrl.startsWith('http://') && !socialUrl.startsWith('https://') && !socialUrl.startsWith('mailto:') && !socialUrl.startsWith('tel:')) {
                         if (platform === 'whatsapp' && /^\d+$/.test(socialUrl.replace(/\D/g,''))) {
@@ -451,6 +451,7 @@
                         }
                     }
                     
+                    // Create the link element
                     const link = document.createElement('a');
                     link.href = socialUrl;
                     link.target = '_blank';
@@ -459,40 +460,34 @@
                     link.className = 'social-link';
                     link.setAttribute('aria-label', platform);
                     
-                    // Special handling for Instagram on mobile
+                    // Special handling for Instagram
                     if (platform === 'instagram') {
+                        // Extract username
+                        let username = socialUrl.split('instagram.com/')[1].split('/')[0];
+                        
+                        // Store username as data attribute
+                        link.setAttribute('data-username', username);
+                        
+                        // Remove target="_blank" for Instagram on mobile
+                        if (/Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent)) {
+                            link.removeAttribute('target');
+                        }
+                        
+                        // Add click handler
                         link.addEventListener('click', function(e) {
                             e.preventDefault();
                             
-                            // Extract username from URL
-                            let username = this.href.split('instagram.com/')[1].split('/')[0];
-                            
-                            // Detect mobile device
+                            const username = this.getAttribute('data-username');
                             const isMobile = /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent);
-                            const isIOS = /iPhone|iPad|iPod/i.test(navigator.userAgent);
-                            const isAndroid = /Android/i.test(navigator.userAgent);
                             
                             if (isMobile) {
-                                if (isIOS) {
-                                    // Try to open Instagram app on iOS
-                                    window.location.href = `instagram://user?username=${username}`;
-                                    
-                                    // Fallback to web after 500ms if app not installed
-                                    setTimeout(function() {
-                                        window.location.href = `https://instagram.com/${username}`;
-                                    }, 500);
-                                } else if (isAndroid) {
-                                    // Use intent for Android
-                                    window.location.href = `intent://instagram.com/_u/${username}#Intent;package=com.instagram.android;scheme=https;end`;
-                                    
-                                    // Fallback to web
-                                    setTimeout(function() {
-                                        window.location.href = `https://instagram.com/${username}`;
-                                    }, 500);
-                                } else {
-                                    // Other mobile devices - direct to web
-                                    window.open(`https://instagram.com/${username}`, '_blank');
-                                }
+                                // Try to open Instagram app
+                                window.location.href = `instagram://user?username=${username}`;
+                                
+                                // Fallback to web after a delay
+                                setTimeout(function() {
+                                    window.location.href = `https://instagram.com/${username}`;
+                                }, 500);
                             } else {
                                 // Desktop - open in new tab
                                 window.open(`https://instagram.com/${username}`, '_blank');
@@ -500,6 +495,7 @@
                         });
                     }
                     
+                    // Create SVG icon
                     const svg = document.createElementNS('http://www.w3.org/2000/svg', 'svg');
                     svg.setAttribute('viewBox', '0 0 24 24');
                     svg.setAttribute('fill', 'none');
