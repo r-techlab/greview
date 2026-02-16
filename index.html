@@ -347,11 +347,6 @@
         const API_KEY = 'AIzaSyByyiuwuJBysKl2xtvl6wCw6Gz9shyDzXs';
         const SHEET_NAME = 'SocialMediaCard';
 
-        // Helper function to detect if device is mobile
-        function isMobileDevice() {
-            return /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent);
-        }
-
         // Helper function to extract Instagram username from URL
         function getInstagramUsername(url) {
             if (!url) return null;
@@ -473,35 +468,47 @@
                 if (socialUrl) {
                     socialLinksFound++;
                     
-                    // Special handling for Instagram
-                    if (platform === 'instagram') {
+                    // Regular URL processing for all platforms
+                    if (!socialUrl.startsWith('http://') && !socialUrl.startsWith('https://') && !socialUrl.startsWith('mailto:') && !socialUrl.startsWith('tel:')) {
+                        if (platform === 'whatsapp' && /^\d+$/.test(socialUrl.replace(/\D/g,''))) {
+                            socialUrl = `https://wa.me/${socialUrl.replace(/\D/g,'')}`;
+                        } else if (platform === 'instagram') {
+                            const username = getInstagramUsername(socialUrl);
+                            if (username) {
+                                socialUrl = `https://www.instagram.com/${username}/`;
+                            } else {
+                                socialUrl = 'https://www.instagram.com/' + socialUrl;
+                            }
+                        } else {
+                            socialUrl = 'https://' + socialUrl;
+                        }
+                    } else if (platform === 'instagram') {
+                        // Ensure Instagram URLs are clean
                         const username = getInstagramUsername(socialUrl);
                         if (username) {
-                            if (isMobileDevice()) {
-                                // On mobile: use redirect to force browser opening
-                                socialUrl = `https://l.instagram.com/?u=https%3A%2F%2Fwww.instagram.com%2F${username}%2F`;
-                            } else {
-                                // On desktop: use standard Instagram URL
-                                socialUrl = `https://www.instagram.com/${username}/`;
-                            }
-                        } else if (!socialUrl.startsWith('http://') && !socialUrl.startsWith('https://')) {
-                            socialUrl = 'https://www.instagram.com/' + socialUrl;
-                        }
-                    } else {
-                        // Regular URL processing for other platforms
-                        if (!socialUrl.startsWith('http://') && !socialUrl.startsWith('https://') && !socialUrl.startsWith('mailto:') && !socialUrl.startsWith('tel:')) {
-                            if (platform === 'whatsapp' && /^\d+$/.test(socialUrl.replace(/\D/g,''))) {
-                                socialUrl = `https://wa.me/${socialUrl.replace(/\D/g,'')}`;
-                            } else {
-                                socialUrl = 'https://' + socialUrl;
-                            }
+                            socialUrl = `https://www.instagram.com/${username}/`;
                         }
                     }
                     
                     const link = document.createElement('a');
-                    link.href = socialUrl;
-                    link.target = '_blank';
-                    link.rel = 'noopener noreferrer';
+                    
+                    // Special click handler for Instagram on mobile
+                    if (platform === 'instagram') {
+                        link.href = '#';
+                        link.addEventListener('click', function(e) {
+                            e.preventDefault();
+                            const username = getInstagramUsername(socialUrl);
+                            if (username) {
+                                // Open in new window/tab - this forces external browser on mobile
+                                window.open(`https://www.instagram.com/${username}/`, '_blank', 'noopener,noreferrer');
+                            }
+                        });
+                    } else {
+                        link.href = socialUrl;
+                        link.target = '_blank';
+                        link.rel = 'noopener noreferrer';
+                    }
+                    
                     link.title = platform.charAt(0).toUpperCase() + platform.slice(1);
                     link.className = 'social-link';
                     link.setAttribute('aria-label', platform);
