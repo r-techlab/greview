@@ -354,13 +354,18 @@
 
         // Helper function to extract Instagram username from URL
         function getInstagramUsername(url) {
+            if (!url) return null;
+            
+            // Remove protocol and www
+            url = url.replace(/^https?:\/\/(www\.)?/, '');
             // Remove trailing slashes
             url = url.replace(/\/+$/, '');
             
             // Extract username from various Instagram URL formats
             const patterns = [
-                /instagram\.com\/([^\/\?]+)/i,
-                /instagr\.am\/([^\/\?]+)/i
+                /^instagram\.com\/([^\/\?]+)/i,
+                /^instagr\.am\/([^\/\?]+)/i,
+                /^([^\/\?]+)$/ // Just username
             ];
             
             for (const pattern of patterns) {
@@ -468,12 +473,19 @@
                 if (socialUrl) {
                     socialLinksFound++;
                     
-                    // Special handling for Instagram on mobile
-                    if (platform === 'instagram' && isMobileDevice()) {
+                    // Special handling for Instagram
+                    if (platform === 'instagram') {
                         const username = getInstagramUsername(socialUrl);
                         if (username) {
-                            // Use app deep link for mobile
-                            socialUrl = `instagram://user?username=${username}`;
+                            if (isMobileDevice()) {
+                                // On mobile: use redirect to force browser opening
+                                socialUrl = `https://l.instagram.com/?u=https%3A%2F%2Fwww.instagram.com%2F${username}%2F`;
+                            } else {
+                                // On desktop: use standard Instagram URL
+                                socialUrl = `https://www.instagram.com/${username}/`;
+                            }
+                        } else if (!socialUrl.startsWith('http://') && !socialUrl.startsWith('https://')) {
+                            socialUrl = 'https://www.instagram.com/' + socialUrl;
                         }
                     } else {
                         // Regular URL processing for other platforms
@@ -488,30 +500,11 @@
                     
                     const link = document.createElement('a');
                     link.href = socialUrl;
+                    link.target = '_blank';
+                    link.rel = 'noopener noreferrer';
+                    link.title = platform.charAt(0).toUpperCase() + platform.slice(1);
                     link.className = 'social-link';
                     link.setAttribute('aria-label', platform);
-                    
-                    // For Instagram on mobile, prevent default and use custom handler
-                    if (platform === 'instagram' && isMobileDevice()) {
-                        link.addEventListener('click', function(e) {
-                            e.preventDefault();
-                            const username = getInstagramUsername(data[variations.find(v => data[v])]);
-                            if (username) {
-                                // Try app link first
-                                window.location.href = `instagram://user?username=${username}`;
-                                
-                                // Fallback to web after 1 second if app didn't open
-                                setTimeout(function() {
-                                    window.location.href = `https://www.instagram.com/${username}/`;
-                                }, 1000);
-                            }
-                        });
-                    } else {
-                        link.target = '_blank';
-                        link.rel = 'noopener noreferrer';
-                    }
-                    
-                    link.title = platform.charAt(0).toUpperCase() + platform.slice(1);
                     
                     const svg = document.createElementNS('http://www.w3.org/2000/svg', 'svg');
                     svg.setAttribute('viewBox', '0 0 24 24');
