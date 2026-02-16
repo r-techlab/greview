@@ -475,40 +475,25 @@
                         } else if (platform === 'instagram') {
                             const username = getInstagramUsername(socialUrl);
                             if (username) {
-                                socialUrl = `https://www.instagram.com/${username}/`;
+                                socialUrl = `https://instagram.com/${username}`;
                             } else {
-                                socialUrl = 'https://www.instagram.com/' + socialUrl;
+                                socialUrl = 'https://instagram.com/' + socialUrl;
                             }
                         } else {
                             socialUrl = 'https://' + socialUrl;
                         }
                     } else if (platform === 'instagram') {
-                        // Ensure Instagram URLs are clean
+                        // Ensure Instagram URLs are clean - remove www and trailing slash
                         const username = getInstagramUsername(socialUrl);
                         if (username) {
-                            socialUrl = `https://www.instagram.com/${username}/`;
+                            socialUrl = `https://instagram.com/${username}`;
                         }
                     }
                     
                     const link = document.createElement('a');
-                    
-                    // Special click handler for Instagram on mobile
-                    if (platform === 'instagram') {
-                        link.href = '#';
-                        link.addEventListener('click', function(e) {
-                            e.preventDefault();
-                            const username = getInstagramUsername(socialUrl);
-                            if (username) {
-                                // Open in new window/tab - this forces external browser on mobile
-                                window.open(`https://www.instagram.com/${username}/`, '_blank', 'noopener,noreferrer');
-                            }
-                        });
-                    } else {
-                        link.href = socialUrl;
-                        link.target = '_blank';
-                        link.rel = 'noopener noreferrer';
-                    }
-                    
+                    link.href = socialUrl;
+                    link.target = '_blank';
+                    link.rel = 'noopener noreferrer';
                     link.title = platform.charAt(0).toUpperCase() + platform.slice(1);
                     link.className = 'social-link';
                     link.setAttribute('aria-label', platform);
